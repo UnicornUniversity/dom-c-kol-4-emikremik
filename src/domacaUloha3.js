@@ -37,7 +37,7 @@ const zenskeMeno = [
 
 /**
  * Vracia náhodný prvok z poľa.
- * @param {Array} array - Vstupné pole
+ * @param {Array} array - Pole, z ktorého sa vyberá
  * @returns {*} Náhodný prvok z poľa
  */
 function randomItem(array) {
@@ -46,7 +46,7 @@ function randomItem(array) {
 
 /**
  * Generuje náhodnú osobu s menom, priezviskom a pohlavím.
- * @returns {{ name: string, surname: string, gender: string }}
+ * @returns {{ name: string, surname: string, gender: string }} Náhodne vygenerovaná osoba
  */
 function nahodneMeno() {
   const zena = Math.random() < 0.5;
@@ -62,7 +62,7 @@ function nahodneMeno() {
 
 /**
  * Generuje náhodné pracovné zaťaženie.
- * @returns {string}
+ * @returns {string} Náhodne vybrané pracovné zaťaženie
  */
 function nahodneZatazenie() {
   const uvazok = ["10", "20", "30", "40"];
@@ -73,7 +73,7 @@ function nahodneZatazenie() {
  * Generuje náhodný vek v zadanom rozsahu.
  * @param {number} min - Minimálny vek
  * @param {number} max - Maximálny vek
- * @returns {number}
+ * @returns {number} Náhodný vek
  */
 function nahodnyVek(min, max) {
   if (min > max) {
@@ -84,8 +84,8 @@ function nahodnyVek(min, max) {
 
 /**
  * Generuje náhodný dátum narodenia (ISO) na základe veku.
- * @param {number} vek
- * @returns {string}
+ * @param {number} vek - Vek osoby
+ * @returns {string} Dátum narodenia vo formáte ISO
  */
 function nahodneNarodeniny(vek) {
   const dnes = new Date();
@@ -98,8 +98,8 @@ function nahodneNarodeniny(vek) {
 
 /**
  * Hlavná funkcia generujúca zoznam zamestnancov.
- * @param {{ count: number, vekMin: number, vekMax: number }} dtoIn
- * @returns {{ employees: Array }}
+ * @param {{ count: number, vekMin: number, vekMax: number }} dtoIn - Vstupný objekt s počtom a rozsahom veku
+ * @returns {{ employees: Array }} Objekt obsahujúci pole zamestnancov
  */
 export function main(dtoIn) {
   const employees = [];
@@ -119,3 +119,7 @@ export function main(dtoIn) {
 
   return { employees };
 }
+
+// Test
+// const dtoIn = { count: 50, vekMin: 19, vekMax: 35 };
+// console.log(main(dtoIn));
