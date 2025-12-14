@@ -105,7 +105,7 @@ function nahodneNarodeniny(vek) {
  * @param {{count: number, vekMin: number, vekMax: number}} dtoIn - Vstupné dáta.
  * @returns {{employees: Array}} Objekt obsahujúci zoznam vygenerovaných zamestnancov.
  */
-function main(dtoIn) {
+export function main(dtoIn) {
   const employees = [];
 
   for (let i = 0; i < dtoIn.count; i++) {
