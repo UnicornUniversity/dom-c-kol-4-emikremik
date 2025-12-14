@@ -1,141 +1,177 @@
-
-// paste stary kod,, cakam na feedback
-
-const muzskePriezvisko = [
-"Novák","Svoboda","Novotný","Dvořák","Černý","Procházka","Kučera","Veselý","Horák","Němec", "Marek","Pospíšil","Pokorný","Hájek",
-"Král","Jelínek","Růžička","Beneš","Fiala","Sedláček", "Doležal","Zeman","Kolář","Urban","Vašek","Kopecký","Šimek","Malý","Kadlec",
-"Čech", "Říha","Holub","Bláha","Moravec","Beran","Krejčí","Tichý","Pavlík","Vondrák","Matouš", "Straka","Soukup","Vlček","Krupa",
-"Štěpánek","Bartoš","Kovařík","Benda","Hlaváček","Konečný"
-];
-
-const zenskePriezvisko = [
-"Nováková","Svobodová","Novotná","Dvořáková","Černá","Procházková","Kučerová","Veselá","Horáková","Němcová", "Marková","Pospíšilová",
-"Pokorná","Hájková","Králová","Jelínková","Růžičková","Benešová","Fialová","Sedláčková", "Doležalová","Zemanová","Kolářová",
-"Urbanová","Vašková","Kopecká","Šimková","Malá","Kadlecová","Čechová", "Říhová","Holubová","Bláhová","Moravcová","Beranová",
-"Krejčíková","Tichá","Pavlíková","Vondráková","Matoušová", "Straková","Soukupová","Vlčková","Krupová","Štěpánková","Bartošová",
-"Kovaříková","Bendová","Hlaváčková","Konečná"
-];
-
-const muzskeMeno = [
-"Adam","Adrian","Aleš","Albert","Alex","Alexander","Antonín","Benedikt","Bohumil","Bohuslav", "Cyril","Dalibor","Daniel","David",
-"Denis","Dominik","Eduard","Erik","František","Hynek", "Ivan","Jakub","Jan","Jaromír","Jaroslav","Jindřich","Josef","Kamil","Karel",
-"Kryštof", "Ladislav","Leo","Lukáš","Marcel","Marek","Martin","Matěj","Michal","Miroslav","Norbert", "Oldřich","Ondřej","Patrik",
-"Pavel","Radek","Roman","Stanislav","Štěpán","Václav","Vojtěch"
-];
-
-const zenskeMeno = [
-"Adéla","Alena","Alice","Amálie","Andrea","Anna","Barbora","Beáta","Blanka","Božena", "Denisa","Diana","Eliška","Eva","Gabriela",
-"Hana","Helena","Ivana","Jana","Jarmila", "Jitka","Kamila","Karolína","Kateřina","Klára","Kristýna","Lenka","Lucie","Magdaléna",
-"Marcela", "Marie","Markéta","Michaela","Monika","Nela","Nikola","Olga","Petra","Renata","Romana", "Sandra","Simona","Soňa","Šárka",
-"Tereza","Veronika","Věra","Viktorie","Zdeňka","Žaneta"
-];
-
+import { main as hw3Main } from './domacaUloha3.js';
 
 /**
- * Vracia náhodný prvok z poľa.
- * @param {Array} array - Pole, z ktorého sa vyberie náhodný prvok.
- * @returns {*} Náhodný prvok poľa.
+ * Calculates age based on ISO birthdate.
+ * @param {string} datumNarodenia - Date of birth in ISO format
+ * @returns {number} Age in years
  */
-function randomItem(array) {
-  return array[Math.floor(Math.random() * array.length)]
+function getAge(datumNarodenia) {
+  const narodenie = new Date(datumNarodenia);
+  const dnes = new Date();
+  let age = dnes.getFullYear() - narodenie.getFullYear();
+  const mediacDiff = dnes.getMonth() - narodenie.getMonth();
+  if (mediacDiff < 0 || (mediacDiff === 0 && dnes.getDate() < narodenie.getDate())) {
+    age -= 1;
+  }
+  return age;
 }
 
 /**
- * Generuje náhodnú osobu s menom, priezviskom a pohlavím.
- * @returns {{name: string, surname: string, gender: "male"|"female"}} Náhodne vygenerovaná osoba.
+ * Counts total employees and workload distribution.
+ * @param {Array} employees - Array of employee objects
+ * @returns {object} total count and workloads { total, scitaneWorkloads }
  */
-function nahodneMeno() {
-  const zena = Math.random() < 0.5;
+function pocetZamestnancu(employees) {
+  const total = employees.length;
+  const scitaneWorkloads = { 10: 0, 20: 0, 30: 0, 40: 0 };
 
-  const krstneMeno = zena ? zenskeMeno : muzskeMeno;
-  const priezviskoList = zena ? zenskePriezvisko : muzskePriezvisko;
-
-  const name = randomItem(krstneMeno);
-  const surname = randomItem(priezviskoList);
-  const gender = zena ? "female" : "male";
-
-  return { name, surname, gender };  
-}
-
-/**
- * Generuje náhodné pracovné zaťaženie.
- * @returns {"10"|"20"|"30"|"40"} Náhodné zaťaženie.
- */
-function nahodneZatazenie() {
-  const uvazok = ["10", "20", "30", "40"]
-
-  const hodiny = randomItem(uvazok)
-
-  const workLoad = hodiny
-  return workLoad
-}
-
-/**
- * Generuje náhodný vek na základe minimálnej a maximálnej hodnoty.
- * @param {number} min - Minimálny vek.
- * @param {number} max - Maximálny vek.
- * @throws {Error} Ak je vekMin väčší ako vekMax alebo naopak.
- * @returns {number} Náhodný vek medzi min a max.
- */
-function nahodnyVek(min, max) {
-
-  if (dtoIn.vekMin > dtoIn.vekMax) {
-    throw new Error("vekMin nemôže byť väčší ako vekMax")
+  for (let i = 0; i < employees.length; i++) {
+    const w = employees[i].workload;
+    scitaneWorkloads[w] += 1;
   }
 
-  return Math.floor(Math.random() * (max - min + 1)) + min;
+  return { total, scitaneWorkloads };
 }
 
 /**
- * Generuje náhodné dátum narodenia vo formáte ISO na základe veku.
- * @param {number} vek - Vek zamestnanca.
- * @returns {string} Dátum narodenia vo formáte ISO.
+ * Calculates age statistics: min, max, average, medianAge
+ * @param {Array} employees - Array of employee objects
+ * @returns {object} Age statistics { vekMin, vekMax, avgAge, medianAge }
  */
-function nahodneNarodeniny(vek) {
-  const dnes = new Date();
-  const rok = dnes.getFullYear() - vek;
+function vekStats(employees) {
+  const vek = employees.map(e => getAge(e.narodeniny));
 
-  const mesiac = Math.floor(Math.random() * 12);
-  const den = Math.floor(Math.random() * 28) + 1;
+  let sum = 0;
+  let vekMin = vek[0];
+  let vekMax = vek[0];
 
-  return new Date(Date.UTC(rok, mesiac, den)).toISOString();
+  for (let i = 0; i < vek.length; i++) {
+    sum += vek[i];
+    if (vek[i] < vekMin) vekMin = vek[i];
+    if (vek[i] > vekMax) vekMax = vek[i];
+  }
+
+  const avgAge = Math.round((sum / vek.length) * 10) / 10;
+
+  const sorted = vek.slice().sort((a, b) => a - b);
+  const mid = Math.floor(sorted.length / 2);
+  const medianAge = sorted.length % 2 !== 0
+    ? sorted[mid]
+    : (sorted[mid - 1] + sorted[mid]) / 2;
+
+  return { vekMin, vekMax, avgAge, medianAge };
 }
 
 /**
- * Hlavná funkcia generujúca zoznam zamestnancov.
- * @param {{count: number, vekMin: number, vekMax: number}} dtoIn - Vstupné dáta.
- * @returns {{employees: Array}} Objekt obsahujúci zoznam vygenerovaných zamestnancov.
+ * Calculates medianAge workload among employees.
+ * @param {Array} employees - Array of employee objects
+ * @returns {number} Median workload
+ */
+function medianWorkload(employees) {
+  const allWorkloads = employees.map(e => parseInt(e.workload)).sort((a, b) => a - b);
+  const mid = Math.floor(allWorkloads.length / 2);
+  return allWorkloads.length % 2 !== 0
+    ? allWorkloads[mid]
+    : (allWorkloads[mid - 1] + allWorkloads[mid]) / 2;
+}
+
+/**
+ * Calculates average workload for female employees.
+ * @param {Array} employees - Array of employee objects
+ * @returns {number} Average workload of females
+ */
+function priemerZenskyWorkload(employees) {
+  const zeny = employees.filter(e => e.gender === 'female');
+  if (zeny.length === 0) return 0;
+  const sum = zeny.reduce((acc, e) => acc + parseInt(e.workload), 0);
+  return Math.round((sum / zeny.length) * 10) / 10;
+}
+
+/**
+ * Returns employees sorted by workload ascending.
+ * @param {Array} employees - Array of employee objects
+ * @returns {Array} Sorted employees
+ */
+function zoradPodlaWorkload(employees) {
+  return employees.slice().sort((a, b) => parseInt(a.workload) - parseInt(b.workload));
+}
+
+/**
+ * Generates employee data using Homework 3 generator.
+ * @param {object} dtoIn - Input object { count, vekMin, vekMax }
+ * @returns {Array} Array of employees
+ */
+function generateEmployeeData(dtoIn) {
+  return hw3Main(dtoIn).employees;
+}
+
+/**
+ * Collects all required statistics from employees.
+ * @param {Array} employees - Array of employee objects
+ * @returns {object} All statistics { counts, vekStatistiky, medianWorkload, priemernyZensk, zoradeniEmployees }
+ */
+function getEmployeeStatistics(employees) {
+  const counts = pocetZamestnancu(employees);
+  const vekStatistiky = vekStats(employees);
+  const medianWork = medianWorkload(employees);
+  const avgZeny = priemerZenskyWorkload(employees);
+  const zoradeniEmployees = zoradPodlaWorkload(employees);
+
+  return {
+    counts,
+    vekStatistiky,
+    medianWorkload: medianWork,
+    priemernyZensk: avgZeny,
+    zoradeniEmployees
+  };
+}
+
+/**
+ * Main exported function for assignment.
+ * Returns structured output for submission.
+ * @param {object} dtoIn - Input { count, vekMin, vekMax }
+ * @returns {object} dtoOut containing employees and statistics
+ */
+export function runMain(dtoIn) {
+  const employees = generateEmployeeData(dtoIn);
+  const stats = getEmployeeStatistics(employees);
+  return { employees, ...stats };
+}
+
+/**
+ * Optional console logger for testing/debugging.
+ * @param {object} dtoIn - Input { count, vekMin, vekMax }
  */
 function main(dtoIn) {
-  const employees = [];
-
-  for (let i = 0; i < dtoIn.count; i++) {
-    const osoba = nahodneMeno();
-    const vek = nahodnyVek(dtoIn.vekMin, dtoIn.vekMax);  
-    const narodeniny = nahodneNarodeniny(vek);
-    const workload = nahodneZatazenie();
-
-    employees.push({
-      gender: osoba.gender, 
-      narodeniny,
-      name: osoba.name,
-      surname: osoba.surname,
-      workload
-    });
+    const dtoOut = runMain(dtoIn);
+    const consoleDtoOut = {
+      total: dtoOut.counts.total,
+  
+      workload10: dtoOut.counts.scitaneWorkloads["10"],
+      workload20: dtoOut.counts.scitaneWorkloads["20"],
+      workload30: dtoOut.counts.scitaneWorkloads["30"],
+      workload40: dtoOut.counts.scitaneWorkloads["40"],
+  
+      averageAge: dtoOut.vekStatistiky.avgAge,
+      minAge: dtoOut.vekStatistiky.vekMin,
+      maxAge: dtoOut.vekStatistiky.vekMax,
+      medianAge: dtoOut.vekStatistiky.medianAge,
+  
+      medianWorkload: dtoOut.medianWorkload,
+      averageWomenWorkload: dtoOut.priemernyZensk,
+  
+      sortedByWorkload: dtoOut.zoradeniEmployees.map(e => ({
+        gender: e.gender,
+        birthdate: e.narodeniny,
+        name: e.name,
+        surname: e.surname,
+        workload: Number(e.workload)
+      }))
+    };
+  
+    console.log(consoleDtoOut);
   }
-
-  return { employees };
-}
-
-// statistic
-
-// pocet jednotlivych workloads
-
-
-// test 
-const dtoIn = { count: 50, vekMin: 19, vekMax: 35 };
-export function getEmployeeStatistics(employees) {
-  //TODO code
-  //let dtoOut = exGetEmployeeStatistics(employees);
-  return dtoOut;
-}
+  
+// test
+// const dtoIn = { count: 15, vekMin: 19, vekMax: 35 };
+main(dtoIn);
