@@ -1,4 +1,4 @@
-import { main as hw3Main } from './domacaUloha3.js';
+import { main as hw3Main } from './main.js';
 
 /**
  * Calculates age based on ISO birthdate.
@@ -142,8 +142,9 @@ export function runMain(dtoIn) {
  * Optional console logger for testing/debugging.
  * @param {object} dtoIn - Input { count, vekMin, vekMax }
  */
-function main(dtoIn) {
-    const dtoOut = runMain(dtoIn);
+function main(testdtoIn) {
+    const dtoOut = runMain(testdtoIn);
+
     const consoleDtoOut = {
       total: dtoOut.counts.total,
   
@@ -172,6 +173,6 @@ function main(dtoIn) {
     console.log(consoleDtoOut);
   }
   
-// test
-// const dtoIn = { count: 15, vekMin: 19, vekMax: 35 };
+// ---------- Test Run ----------
+const dtoIn = { count: 2, vekMin: 19, vekMax: 35 };
 main(dtoIn);
