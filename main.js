@@ -1,4 +1,4 @@
-import { main as hw3Main } from './domacaUloha3.js';
+import { main as hw3Main } from './src/domacaUloha3.js';
 
 /**
  * Calculates age based on ISO birthdate.
