@@ -87,7 +87,14 @@ function nahodnyVek(min, max) {
  * @param {number} vek - Vek osoby
  * @returns {string} Dátum narodenia vo formáte ISO
  */
+/**
+ * Generates a valid random birthdate (ISO) based on age.
+ * @param {number} vek - Age of the person
+ * @returns {string} ISO birthdate
+ */
 function nahodneNarodeniny(vek) {
+  vek = Math.max(0, Math.floor(vek));
+
   const dnes = new Date();
   const rok = dnes.getFullYear() - vek;
   const mesiac = Math.floor(Math.random() * 12);
@@ -119,6 +126,7 @@ export function main(dtoIn) {
 
   return { employees };
 }
+
 
 // Test
 // const dtoIn = { count: 50, vekMin: 19, vekMax: 35 };
