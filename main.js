@@ -63,7 +63,7 @@ function vekStats(employees) {
 }
 
 /**
- * Calculates medianAge workload among employees.
+ * Calculates median workload among employees.
  * @param {Array} employees - Array of employee objects
  * @returns {number} Median workload
  */
@@ -143,36 +143,35 @@ export function runMain(dtoIn) {
  * @param {object} testdtoIn - Input { count, vekMin, vekMax }
  */
 function main(testdtoIn) {
-    const dtoOut = runMain(testdtoIn);
+  const dtoOut = runMain(testdtoIn);
 
-    const consoleDtoOut = {
-      total: dtoOut.counts.total,
-  
-      workload10: dtoOut.counts.scitaneWorkloads["10"],
-      workload20: dtoOut.counts.scitaneWorkloads["20"],
-      workload30: dtoOut.counts.scitaneWorkloads["30"],
-      workload40: dtoOut.counts.scitaneWorkloads["40"],
-  
-      averageAge: dtoOut.vekStatistiky.avgAge,
-      minAge: dtoOut.vekStatistiky.vekMin,
-      maxAge: dtoOut.vekStatistiky.vekMax,
-      medianAge: dtoOut.vekStatistiky.medianAge,
-  
-      medianWorkload: dtoOut.medianWorkload,
-      averageWomenWorkload: dtoOut.priemernyZensk,
-  
-      sortedByWorkload: dtoOut.zoradeniEmployees.map(e => ({
-        gender: e.gender,
-        birthdate: e.narodeniny,
-        name: e.name,
-        surname: e.surname,
-        workload: Number(e.workload)
-      }))
-    };
-  
-    console.log(consoleDtoOut);
-  }
-  
-// ---------- Test Run ----------
-const dtoIn = { count: 2, vekMin: 19, vekMax: 35 };
-main(dtoIn);
+  const consoleDtoOut = {
+    total: dtoOut.counts.total,
+
+    workload10: dtoOut.counts.scitaneWorkloads["10"],
+    workload20: dtoOut.counts.scitaneWorkloads["20"],
+    workload30: dtoOut.counts.scitaneWorkloads["30"],
+    workload40: dtoOut.counts.scitaneWorkloads["40"],
+
+    averageAge: dtoOut.vekStatistiky.avgAge,
+    minAge: dtoOut.vekStatistiky.vekMin,
+    maxAge: dtoOut.vekStatistiky.vekMax,
+    medianAge: dtoOut.vekStatistiky.medianAge,
+
+    medianWorkload: dtoOut.medianWorkload,
+    averageWomenWorkload: dtoOut.priemernyZensk,
+
+    sortedByWorkload: dtoOut.zoradeniEmployees.map(e => ({
+      gender: e.gender,
+      birthdate: e.narodeniny,
+      name: e.name,
+      surname: e.surname,
+      workload: Number(e.workload)
+    }))
+  };
+
+  console.log(consoleDtoOut);
+}
+
+
+export { main, generateEmployeeData, getEmployeeStatistics };
